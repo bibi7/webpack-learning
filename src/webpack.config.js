@@ -14,8 +14,8 @@ module.exports = {
 
   output: {
     path: resolve(__dirname, 'dist'),
-
-    filename: 'index.js'
+    filename: 'index.js',
+    publicPath: '/assets/'
   },
 
   module: {
@@ -30,6 +30,10 @@ module.exports = {
         test: /\.html$/,
         loader: 'html-loader'
       }
+      // {
+      //   test: /\.css/,
+      //   loader: /css-loader/
+      // }
     ]
   },
   plugins: [
@@ -43,8 +47,14 @@ module.exports = {
 if (dev) {
   module.exports.serve = {
     port: 8080,
-    add: app => {
-      app.use(convert(history()))
+    host: '0.0.0.0',
+    dev: {
+      publicPath: '/assets/'
     }
+    // add: app => {
+    //   app.use(convert(history({
+    //     index: '/assets/'
+    //   })))
+    // }
   }
 }

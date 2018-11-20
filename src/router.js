@@ -1,3 +1,12 @@
+import foo from './views/foo/foo'
+import bar from './views/bar/bar'
+
+
+const routes = {
+  '/foo': foo,
+  '/bar': bar
+}
+
 class Router {
   constructor(name) {
     this.name = name
@@ -8,6 +17,7 @@ class Router {
       this.load(location.pathname)
     })
 
+    // 打开页面时加载当前页面
     this.load(location.pathname)
   }
 
@@ -18,6 +28,8 @@ class Router {
 
   load(path) {
     if (path === '/') path = '/foo'
+    const view = new routes[path]()
+    view.mount(document.body)
   }
 
   console() {
